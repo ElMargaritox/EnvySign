@@ -46,9 +46,9 @@ namespace EnvySign.Commands
 
             try
             {
-                EnvySignPlugin.Instance.dataBase.Eliminar(x => x.InstanceID == sign.GetInstanceID());
+                EnvySignPlugin.Instance.SignDatabase.RemoveSign(sign.text);
             }
-            catch (Exception)
+            catch
             {
 
                 UnturnedChat.Say(player, EnvySignPlugin.Instance.Translate("no_sign_command"));

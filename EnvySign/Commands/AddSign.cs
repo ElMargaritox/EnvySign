@@ -47,31 +47,17 @@ namespace EnvySign.Commands
             }
 
 
-            try
-            {
-                Signs s = EnvySignPlugin.Instance.dataBase.Buscar(x => x.InstanceID == sign.GetInstanceID())[0];
-                UnturnedChat.Say(player, EnvySignPlugin.Instance.Translate("already_exist_commands", s.Command, s.Permission));
-                return;
-            }
-            catch (Exception) { }
+
+
 
             try
             {
 
-                
 
-                Signs s = new Signs
-                {
-                    InstanceID = sign.GetInstanceID(),
-                    Command = command[0],
-                    Permission = command[1]
-                };
-
-                EnvySign.EnvySignPlugin.Instance.dataBase.Insertar(s);
-                R.Commands.Execute(new ConsolePlayer(), "/save");
+                EnvySignPlugin.Instance.SignDatabase.AddSign(sign.text, command[0], command[1], sign.GetInstanceID());
                 UnturnedChat.Say(player, EnvySignPlugin.Instance.Translate("added_sign"));
             }
-            catch (Exception)
+            catch
             {
                 Logger.LogError("Error To Add Signs");
                 
